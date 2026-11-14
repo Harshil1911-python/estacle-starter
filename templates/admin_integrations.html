@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estacle | Integrations</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+<style>
+.main-content { background: transparent !important; }
+.top-bar.dash-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 32px 10px !important; background: transparent !important;
+  border: none !important; box-shadow: none !important; gap: 12px; flex-wrap: wrap;
+}
+.page-title { font-size: 20px; font-weight: 700; color: #0f172a; margin: 0 0 2px; }
+.page-subtitle { font-size: 13px; color: #64748b; margin: 0; }
+.page-wrap { padding: 12px 32px 32px; max-width: 960px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+.card {
+  background: #fff; border: 1px solid #e8ecf1; border-radius: 14px;
+  padding: 18px 18px 16px; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+}
+.card h2 { margin: 0 0 6px; font-size: 15px; font-weight: 700; color: #0f172a; }
+.card p { margin: 0 0 12px; font-size: 13px; color: #64748b; line-height: 1.5; }
+.card .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+  padding: 10px 12px; color: #334155; word-break: break-all;
+}
+.badge {
+  display: inline-flex; align-items: center; height: 22px; padding: 0 8px;
+  border-radius: 999px; font-size: 11px; font-weight: 700;
+  background: #eef2ff; color: #4338ca; margin-bottom: 10px;
+}
+.badge.warn { background: #fff7ed; color: #c2410c; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.links a {
+  height: 34px; padding: 0 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600;
+  text-decoration: none; display: inline-flex; align-items: center;
+  border: 1px solid #e2e8f0; color: #334155; background: #fff;
+}
+.links a.primary { background: #0f172a; color: #fff; border-color: #0f172a; }
+</style>
+</head>
+<body>
+<div class="app-layout">
+{% set active = 'integrations' %}
+{% include 'partials/admin_sidebar.html' %}
+<main class="main-content">
+  <header class="top-bar dash-top">
+    <div>
+      <h1 class="page-title">Integrations</h1>
+      <p class="page-subtitle">Connect Estacle to Claude, MCP, and external tools</p>
+    </div>
+  </header>
+  <div class="page-wrap">
+    <div class="grid">
+      <div class="card">
+        <div class="badge">Live</div>
+        <h2>Claude MCP</h2>
+        <p>Expose CRM tools to Claude Desktop / claude.ai via Model Context Protocol. Employees sign in with their Estacle admin or agent account.</p>
+        <div class="code">{{ mcp_url }}</div>
+        <div class="links">
+          <a class="primary" href="{{ url_for('static', filename='../ESTACLE_MCP_SETUP.md') }}" onclick="return true;">Setup guide</a>
+          <a href="{{ public_base }}/oauth/authorize">OAuth authorize</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="badge">Live</div>
+        <h2>Serenia AI (Groq)</h2>
+        <p>Natural-language CRM operations inside Estacle. Configure your Groq API key under Settings → Serenia AI.</p>
+        <div class="links">
+          <a class="primary" href="{{ url_for('admin.admin_ai') }}">Open Serenia AI</a>
+          <a href="{{ url_for('admin.admin_settings') }}#serenia-ai">API key settings</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="badge warn">Coming soon</div>
+        <h2>Webhooks</h2>
+        <p>Push deal stage changes, new leads, and appointments to your CRM or Slack workspace. Endpoint registration will land here.</p>
+      </div>
+      <div class="card">
+        <div class="badge warn">Coming soon</div>
+        <h2>Zapier / Make</h2>
+        <p>No-code automations for properties, clients, and deals. Connector packaging is on the roadmap.</p>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+</body>
+</html>
